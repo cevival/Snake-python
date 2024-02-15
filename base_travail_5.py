@@ -18,7 +18,8 @@ next_move = 0 #tic avant déplacement
 color = {
     "ground_color" : "#EDDACF",
     "grid_color" : "#7F513D",
-    "player_color" : "#FF0000",
+    "head_color" : "#FF0000",
+    "body_color" : "#00FF00",
     "wall_color" : "#000000"
 }
 
@@ -42,6 +43,7 @@ show_pos = False
 keys= { "UP":0 , "DOWN":0, "LEFT":0, "RIGHT":0 }
 
 player_pos = Pos(9,4)
+body_pos = Pos(9,3)
 
 #tour de boucle, pour chaque FPS
 while running:
@@ -96,6 +98,7 @@ while running:
 
     next_move += dt
     if next_move>0:
+        body_pos.x, body_pos.y = player_pos.x, player_pos.y
         new_x, new_y = player_pos.x, player_pos.y
         if keys['UP'] == 1:
             new_y -=1
@@ -124,7 +127,8 @@ while running:
     if show_grid:
         grid.draw(screen)
 
-    pygame.draw.rect(screen, color["player_color"], pygame.Rect(player_pos.x*tilesize, player_pos.y*tilesize, tilesize, tilesize*2))
+    pygame.draw.rect(screen, color["head_color"], pygame.Rect(player_pos.x*tilesize, player_pos.y*tilesize, tilesize, tilesize))
+    pygame.draw.rect(screen, color["body_color"], pygame.Rect(body_pos.x*tilesize, body_pos.y*tilesize, tilesize, tilesize*1))
 
     # affichage des modification du screen_view
     pygame.display.flip()
