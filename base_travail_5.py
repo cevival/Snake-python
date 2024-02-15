@@ -47,6 +47,11 @@ keys= { "UP":0 , "DOWN":0, "LEFT":0, "RIGHT":0 }
 player_pos = Pos(9,4)
 body_pos = Pos(9,3)
 
+z_press = 0
+s_press = 0
+q_press = 0
+d_press = 0
+
 #tour de boucle, pour chaque FPS
 while running:
 
@@ -103,15 +108,36 @@ while running:
         body_pos.x, body_pos.y = player_pos.x, player_pos.y
         new_x, new_y = player_pos.x, player_pos.y
         if keys['UP'] == 1:
-            new_y -= 1
+            z_press = 1
+            s_press = 0
+            q_press = 0
+            d_press = 0
         elif keys['DOWN'] == 1:
-            new_y += 1
+            z_press = 0
+            s_press = 1
+            q_press = 0
+            d_press = 0
         elif keys['LEFT'] == 1:
-            new_x -= 1
+            z_press = 0
+            s_press = 0
+            q_press = 1
+            d_press = 0
         elif keys['RIGHT'] == 1:
-            new_x += 1
-        else:
+            z_press = 0
+            s_press = 0
+            q_press = 0
+            d_press = 1
+            
+
+        if z_press == 1:
             new_y -=1
+        elif s_press == 1:
+            new_y +=1
+        elif q_press == 1:
+            new_x -=1
+        elif d_press ==1:
+            new_x +=1
+
 
         # Gérer les bords du labyrinthe de manière circulaire
         new_x %= size[0]
