@@ -77,18 +77,25 @@ class Labyrinthe :
             self.matrice[i]=tmp_list
     
     def hit_box(self, x, y):
-        """indique si l'élément (x,y) est un mur"""
-        if x>=self.sizeX or x<0 or y<0 or y>=self.sizeY:
-            return 1
+        """Indique si l'élément (x,y) est un mur."""
+        # Gérer les bords de manière circulaire
+        if x >= self.sizeX:
+            x = 0
+        elif x < 0:
+            x = self.sizeX - 1
+        if y >= self.sizeY:
+            y = 0
+        elif y < 0:
+            y = self.sizeY - 1
+        
         return self.matrice[y][x] == 1
 
     def draw(self, screen, tilesize):
-        """dessine le labyrithne sur la fenètre screen"""
+        """Dessine le labyrinthe sur la fenêtre screen."""
         for j in range(self.sizeY):
             for i in range(self.sizeX):
                 if self.matrice[j][i] == 1:
                     pygame.draw.rect(screen, self.color , (i * tilesize, j * tilesize, tilesize, tilesize))
-
 
 #laby = Labyrinthe(20,10)
 #laby.load_from_file("laby-02.csv")
