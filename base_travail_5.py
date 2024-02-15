@@ -1,4 +1,3 @@
-# Example file showing a circle moving on screen
 import pygame 
 import random
 from labyrinthe import Labyrinthe
@@ -12,7 +11,7 @@ tilesize = 32 # taille d'une tuile IG
 size = (20, 10) # taille du monde
 fps = 30 # fps du jeu
 player_speed = 150 # vitesse du joueur
-next_move = 0 #tic avant déplacement
+next_move = 0 # tic avant déplacement
 
 # color
 color = {
@@ -70,16 +69,16 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_z or event.key == pygame.K_UP:
                 keys['UP'] = 0
-                next_move =1
+                next_move = 1
             if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                 keys['DOWN'] = 0
-                next_move =1
+                next_move = 1
             if event.key == pygame.K_q or event.key == pygame.K_LEFT:
                 keys['LEFT'] = 0
-                next_move =1
+                next_move = 1
             if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                 keys['RIGHT'] = 0
-                next_move =1
+                next_move = 1
 
             if event.key == pygame.K_ESCAPE:
                 running = False
@@ -97,17 +96,21 @@ while running:
     #
 
     next_move += dt
-    if next_move>0:
+    if next_move > 0:
         body_pos.x, body_pos.y = player_pos.x, player_pos.y
         new_x, new_y = player_pos.x, player_pos.y
         if keys['UP'] == 1:
-            new_y -=1
+            new_y -= 1
         elif keys['DOWN'] == 1:
             new_y += 1
         elif keys['LEFT'] == 1:
-            new_x -=1
+            new_x -= 1
         elif keys['RIGHT'] == 1:
             new_x += 1
+
+        # Gérer les bords du labyrinthe de manière circulaire
+        new_x %= size[0]
+        new_y %= size[1]
 
         # vérification du déplacement du joueur                                    
         if not laby.hit_box(new_x, new_y):
@@ -115,7 +118,7 @@ while running:
             next_move -= player_speed
 
         if show_pos:
-            print("pos: ",player_pos)
+            print("pos: ", player_pos)
 
     #
     # affichage des différents composants graphique
