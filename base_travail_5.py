@@ -47,7 +47,7 @@ keys= { "UP":0 , "DOWN":0, "LEFT":0, "RIGHT":0 }
 player_pos = Pos(9,4)
 body_pos = Pos(9,3)
 
-z_press = 0
+z_press = 1
 s_press = 0
 q_press = 0
 d_press = 0
@@ -73,6 +73,10 @@ while running:
                 keys['LEFT'] = 1
             if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                 keys['RIGHT'] = 1
+            if event.key == pygame.K_a:  # Quitter le jeu avec la touche A
+                running = False
+            if event.key == pygame.K_p:  # Mettre en pause avec la touche P
+                pause = not pause
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_z or event.key == pygame.K_UP:
