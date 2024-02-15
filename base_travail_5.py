@@ -4,6 +4,9 @@ import random
 from labyrinthe import Labyrinthe
 from grid import Grid
 from utils import Pos
+
+
+
 # pygame setup
 pygame.init()
 
@@ -108,6 +111,8 @@ while running:
             new_x -=1
         elif keys['RIGHT'] == 1:
             new_x += 1
+        else:
+            new_y -=1
 
         # vérification du déplacement du joueur                                    
         if not laby.hit_box(new_x, new_y):
