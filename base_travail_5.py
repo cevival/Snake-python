@@ -1,9 +1,9 @@
-import pygame 
+import pygame
 import random
 from labyrinthe import Labyrinthe
 from grid import Grid
 from utils import Pos
-from apple import Pommes 
+from apple import Pommes
 
 # pygame setup
 pygame.init()
@@ -56,6 +56,9 @@ pommes = Pommes(screen, laby, tilesize)
 # placer les pommes initiales
 for _ in range(3):
     pommes.placer_pomme()
+
+# placer les murs aléatoires
+laby.placer_murs_aleatoires(random.randint(5, 6))
 
 # tour de boucle, pour chaque FPS
 while running:
@@ -146,8 +149,11 @@ while running:
         new_x %= size[0]
         new_y %= size[1]
 
-        # vérification du déplacement du joueur                                    
-        if not laby.hit_box(new_x, new_y):
+        # Vérification de collision avec les murs
+        if laby.hit_box(new_x, new_y):
+            print("Perdu!")  # Affichage dans la console
+            running = False  # Arrêt du jeu si le joueur touche un mur
+        else:
             player_pos.x, player_pos.y = new_x, new_y
             next_move -= player_speed
 
