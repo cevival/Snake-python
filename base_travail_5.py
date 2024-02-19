@@ -3,13 +3,7 @@ import random
 from labyrinthe import Labyrinthe
 from grid import Grid
 from utils import Pos
-<<<<<<< HEAD
 from apple import Pommes 
-=======
-from apple import Apple
-
-
->>>>>>> 375ef18af66c95cc21c9929e82036287293acbb6
 
 # pygame setup
 pygame.init()
